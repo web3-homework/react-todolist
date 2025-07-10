@@ -35,7 +35,13 @@ const AddTodo = React.memo(({ form, onFinish, cancelFn }) => {
 
 export default function TodoList() {
     const [filter, setFilter] = useState('all')
-    const [list, setList] = useState([])
+    const [list, setList] = useState([
+      {
+        id: Date.now(),
+        title: 'Learn React',
+        completed: false
+      }
+    ])
     const [show, setShow] = useState(false)
     const [editIndex, setEditIndex] = useState(-1)
     const [form] = Form.useForm()
