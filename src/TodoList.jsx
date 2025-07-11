@@ -3,14 +3,14 @@ import { Button, Space, Form, Input, Checkbox } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 
 // 使用 React.memo 包装组件，避免不必要的渲染
-const AddTodo = React.memo(({ form, onFinish, cancelFn }) => {
+const AddTodo = React.memo(({ form, onFinish, cancelFn, index }) => {
     const todoFooterStyle = {
         display: 'flex',
         justifyContent: 'flex-end',
     }
     return (
         <div>
-            <h2>New Todo</h2>
+            <h2>{ index === -1 ? 'New Todo' : 'Edit Todo'}</h2>
             <Form
                 layout="horizontal"
                 labelCol={{ span: 2 }}
@@ -39,6 +39,11 @@ export default function TodoList() {
       {
         id: Date.now(),
         title: 'Learn React',
+        completed: true
+      },
+      {
+        id: Date.now() + 1,
+        title: 'complete the todo list',
         completed: false
       }
     ])
@@ -157,7 +162,7 @@ export default function TodoList() {
                     )
                 })}
             </div>
-            {show && <AddTodo form={form} onFinish={onFinish} cancelFn={cancelFn} />}
+            {show && <AddTodo form={form} onFinish={onFinish} cancelFn={cancelFn} index={editIndex} />}
         </div>
     )
 }
